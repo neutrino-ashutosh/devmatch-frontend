@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom";
-import {BASE_Url} from "../utils/constants";
+import {BASE_URL} from "../utils/constants";
 import {removeUser} from "../utils/userSlice";
 
 const NavBar = () => {
@@ -11,12 +11,12 @@ const NavBar = () => {
   const navigate = useNavigate;
   const handleLogout = async() =>{ 
     try{
-        await axios.post(BASE_Url + "/logout", {}, {withCredentials: true});
+        await axios.post(BASE_URL + "/logout", {}, {withCredentials: true});
         dispatch(removeUser());
         return navigate("/login");
       }
      catch(err){
-      // throw new Error("invalid ");
+      console.log(err.message);
      }
   }
 

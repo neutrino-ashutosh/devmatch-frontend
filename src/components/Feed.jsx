@@ -1,5 +1,5 @@
 import axios from 'axios';
-import BASE_URL from '../utils/constants'
+import {BASE_URL} from '../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addFeed } from '../utils/feedSlice';
 import { useEffect } from 'react';
@@ -15,10 +15,10 @@ const Feed = () => {
       const res = await axios.get(BASE_URL+ "/feed", { 
         withCredentials: true,
       });
-      dispatch(addFeed(res.data));
+      dispatch(addFeed(res.data.data));
     } 
     catch(err) {
-      throw new Error("something went wrong in feed")
+      console.log(err.message);
     };
   };
 
@@ -27,9 +27,9 @@ const Feed = () => {
   }, []);
 
   return (
-     feed &&   (
+     feed && (
       <div className='flex justify-center my-10'>
-      <UserCard user={feed[0]} />
+        <UserCard user={feed[0]} />
       </div>
     )
   );
